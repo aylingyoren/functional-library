@@ -1,34 +1,34 @@
 class FuncLib {
-    isArray(obj) {
-        return Array.isArray(obj);
-    }
-    isBoolean(obj) {
-        return typeof obj === 'boolean';
-    }
-    isDate(obj) {
-        return obj instanceof Date;
-    }
-    isNumber(obj) {
-        return typeof obj === 'number';
-    }
-    isString(obj) {
-        return typeof obj === 'string';
-    }
-    isFunction(obj) {
-        return typeof obj === 'function';
-    }
-    isUndefined(obj) {
-        return typeof obj === 'undefined';
-    }
-    isNull(obj) {
-        return obj === null ? true : false;
-    }
+  isArray(obj) {
+    return Array.isArray(obj);
+  }
+  isBoolean(obj) {
+    return typeof obj === "boolean";
+  }
+  isDate(obj) {
+    return obj instanceof Date;
+  }
+  isNumber(obj) {
+    return typeof obj === "number";
+  }
+  isString(obj) {
+    return typeof obj === "string";
+  }
+  isFunction(obj) {
+    return typeof obj === "function";
+  }
+  isUndefined(obj) {
+    return typeof obj === "undefined";
+  }
+  isNull(obj) {
+    return obj === null ? true : false;
+  }
 }
 
-let funcLib = new FuncLib;
+let funcLib = new FuncLib();
 
 let user;
-let userX = { name: 'Max'};
+let userX = { name: "Max" };
 let userY = null;
 
 // console.log(funcLib.isArray({name: 'John'}));
@@ -41,17 +41,32 @@ let userY = null;
 // console.log(funcLib.isNull(user));
 
 class ArrFunc {
-    first(arr) {
-        return arr[0];
-    }
-    last(arr) {
-        return arr[arr.length - 1];
-    }
-    skip(arr, number) {}
-    take(arr, number) {}
+  constructor() {
+    this.value = 0;
+  }
+  get val() {
+    return this.value;
+  }
+  first(arr) {
+    return arr[0];
+  }
+  last(arr) {
+    return arr[arr.length - 1];
+  }
+  skip(arr, number, ...args) {
+    this.value = arr.slice(number, ...args);
+    return this;
+  }
+  take(arr, number) {
+    // arr;    //?????????
+    return this;
+  }
 }
 
-let arrFunc = new ArrFunc;
+let arrFunc = new ArrFunc();
+let array = [1, 2, 3];
 
-console.log(arrFunc.first(['joe', 'monica', 'phoebey']));
-console.log(arrFunc.last(['joe', 'monica', 'phoebey', 'jim', 'bob', 'jill']));
+console.log(arrFunc.first(["joe", "monica", "phoebey"]));
+console.log(arrFunc.last(["joe", "monica", "phoebey", "jim", "bob", "jill"]));
+
+console.log(arrFunc.skip(array, 1).take(array, 1).val); //?????????
