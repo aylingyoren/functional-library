@@ -40,33 +40,71 @@ let userY = null;
 // console.log(funcLib.isUndefined(user));
 // console.log(funcLib.isNull(user));
 
-class ArrFunc {
-  constructor() {
-    this.value = 0;
-  }
-  get val() {
-    return this.value;
-  }
-  first(arr) {
+// class ArrFunc {
+//   constructor() {
+//     this.arr = arr;
+//   }
+//   first(arr) {
+//     return arr[0];
+//   }
+//   last(arr) {
+//     return arr[arr.length - 1];
+//   }
+//   skip(arr, number) {
+//     this.arr = arr.slice(number);
+//     return this;
+//   }
+//   take(arr, number) {
+//     let 
+//     return this;
+//   }
+//   asChain(arr) {
+
+//   }
+// }
+function ArrFunc() {
+
+  this.first = function (arr) {
     return arr[0];
   }
-  last(arr) {
+  this.last = function (arr) {
     return arr[arr.length - 1];
   }
-  skip(arr, number, ...args) {
-    this.value = arr.slice(number, ...args);
-    return this;
+  this.skip = function (arr, number) {
+    return arr.slice(number);
   }
-  take(arr, number) {
-    // arr;    //?????????
-    return this;
+  this.take = function (arr, number) {
+    return arr.slice(0, number);
+  }
+
+  this.asChain = function (arr) {
+    const parent = this;
+    let resultArr = arr;
+     function skip(number) {
+      resultArr = parent.skip(resultArr, number);
+        return {
+          skip, take, arr: resultArr
+        };
+      }
+      function take(number) {
+        resultArr = parent.take(resultArr, number);
+        return {
+          skip, take, arr: resultArr
+        };
+      }
+    return {
+      skip, take, arr: resultArr
+    };
   }
 }
 
 let arrFunc = new ArrFunc();
-let array = [1, 2, 3];
+let array = [1, 2, 3, 5, 10, 59, 265];
 
 console.log(arrFunc.first(["joe", "monica", "phoebey"]));
 console.log(arrFunc.last(["joe", "monica", "phoebey", "jim", "bob", "jill"]));
 
-console.log(arrFunc.skip(array, 1).take(array, 1).val); //?????????
+console.log(arrFunc.skip(array, 1));
+console.log(arrFunc.take(array, 5));
+
+
